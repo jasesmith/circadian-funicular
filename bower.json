@@ -1,0 +1,26 @@
+{
+  "name": "Pocky",
+  "version": "0.0.1",
+  "homepage": "https://github.com/jasesmith/Pocky",
+  "authors": [
+    "Jase <jase@star29.com>"
+  ],
+  "description": "Basic setup for Proof-of-concept experiments",
+  "main": "index.html",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "The Unlicense",
+  "ignore": [
+    "**/.*",
+    "*codekit*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jamfu": "https://github.com/jasesmith/jamfu.git",
+    "ng-sortable": "~1.x.x"
+  }
+}

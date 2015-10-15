@@ -1,0 +1,9 @@
+// use viewort height for base font size in landscape
+@media (orientation:landscape) {
+}
+
+@media screen and (max-width: 1024px), screen and (max-height: 768px) {
+}
+
+@media screen and (max-width: 1024px) and (orientation:landscape), screen and (max-height: 768px) and (orientation:landscape) {
+}

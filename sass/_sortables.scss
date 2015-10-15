@@ -1,0 +1,39 @@
+.as-sortable-item,
+.as-sortable-placeholder {
+    min-height: 3em;
+    display: block;
+}
+
+.as-sortable-item {
+    background-color: #ffffff;
+    -ms-touch-action: auto;
+    touch-action: auto;
+}
+
+.as-sortable-item-handle {
+  cursor: move;
+}
+
+.as-sortable-placeholder {
+    border: white 1px solid;
+    box-shadow: 0 0 0 1pt white inset;
+}
+
+.as-sortable-drag {
+    position: absolute;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: .65;
+    font-size: .8em;
+    padding: 0;//1em;
+    .data {
+        padding: .5em;
+    }
+    li {
+        width: 100% !important;
+    }
+}
+
+.as-sortable-hidden {
+  display: none !important;
+}

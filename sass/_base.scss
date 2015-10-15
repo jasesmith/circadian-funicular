@@ -1,0 +1,50 @@
+html,
+body {
+    background: $light;
+    color: $dark;
+    margin: 0;
+    padding: 0;
+    font-family: $base-font;
+    font-size: 16px;
+}
+
+*, *:before, *:after {box-sizing: border-box;}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+[ng-click] {
+    -webkit-tap-highlight-color: rgba(0,0,0, 0);
+    -webkit-tap-highlight-color: transparent; /* For some Androids */
+}
+
+h1, h2, h3, h4, h5 ,h6, p, ul, ol {
+    padding: 0;
+    margin: 0;
+    + h1, + h2, + h3, + h4, + h5, + h6, + p, + ul, + ol {
+        margin-top: 1.5em;
+    }
+}
+
+p {
+    text-align: justify;
+    line-height: 1.4;
+}
+
+.subtext {
+    font-size: .7em;
+    opacity: .5;
+}
+
+.left-text {text-align:left;}
+.center-text {text-align:center;}
+.right-text {text-align:right;}
+
+// colorize
+.wrapper {
+    header {
+        background: $active;
+        color: $light;
+    }
+}

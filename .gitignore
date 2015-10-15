@@ -1,0 +1,4 @@
+*.codekit
+*.sass-cache
+bower_components
+.DS_Store

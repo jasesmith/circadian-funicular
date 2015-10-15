@@ -1,0 +1,48 @@
+html, body, .wrapper {
+    overflow: hidden;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    header {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        transition: $transition ease-out;
+        .mark {
+            flex: 1;
+            padding: $gutter/4 $gutter/2;
+            font-size: 1.5em;
+        }
+    }
+    .workspace {
+        position: relative;
+        z-index: 1;
+        flex: 1;
+    }
+}
+
+.workspace {
+    display: flex;
+    flex-direction: row;
+    .main {
+        position: relative;
+        overflow: auto;
+        transition: flex-grow .3s ease-out;
+        flex-grow: 2;
+        flex-shrink: 1;
+        flex-basis: 100%;
+        padding: $gutter;
+        z-index: 1;
+    }
+}

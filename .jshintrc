@@ -1,0 +1,24 @@
+{
+  "globals": {
+    "angular": false,
+    "Hammer": false,
+    "moment": false,
+    "_": false,
+    "$": false,
+    "window": false,
+    "app": false,
+    "localStorage": false
+  },
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "freeze": true,
+  "indent": 4,
+  "latedef": true,
+  "laxcomma": true,
+  "node": true,
+  "trailing": true,
+  "strict": true,
+  "unused": "vars",
+  "undef": true
+}
