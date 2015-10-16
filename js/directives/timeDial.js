@@ -36,11 +36,10 @@
         };
 
         var _timeCalc = function(degree, beat){
-            var decimal = 3 + (1/30) * (degree % 360);
+            var t, decimal = 3 + (1/30) * (degree % 360);
             decimal = decimal < 0 ? decimal + 12 : decimal;
 
-            var t = parseInt(decimal);
-
+            t = parseInt(decimal);
             if(beat === 'm') {
                 t = parseInt(decimal * 5) % 60;
             }
@@ -64,8 +63,8 @@
                         '<div class="time">{{format(time)|date:\'h\'}}:{{format(time)|date:\'mm\'}}</div>' +
                         '<div class="meridiem">{{format(time)|date:\'a\'}}</div>' +
                     '</div>' +
-                    '<div class="crown hour"><span hm-pan="dragMe($event, \'h\')"></span></div>' +
-                    '<div class="crown minute"><span hm-pan="dragMe($event, \'m\')"></span></div>' +
+                    '<div class="crown hour"><span hm-pan="setCrown($event, \'h\')"></span></div>' +
+                    '<div class="crown minute"><span hm-pan="setCrown($event, \'m\')"></span></div>' +
                 '</div>' +
                 '',
 
@@ -78,7 +77,7 @@
                 var crownMinute = $angular.element(element.find('.minute'));
                 var crownHour = $angular.element(element.find('.hour'));
 
-                var setCrown = function(time, beat){
+                var calibrate = function(time, beat){
                     time = !time ? scope.time : time;
                     var minute = time.minutes();
                     var hour = time.hours();
@@ -118,13 +117,13 @@
                     }
                 };
 
-                scope.dragMe = function(e, beat){
+                scope.setCrown = function(e, beat){
                     var degrees = _getDeg(e.pointers[0], element[0]);
                     var time = _timeCalc(degrees, beat);
 
                     if(beat === 'm') {
                         scope.time.minute(time);
-                        setCrown(scope.time, 'h');
+                        calibrate(scope.time, 'h');
                     } else {
                         if(scope.meridiem === 'pm') {
                             time += 12;
@@ -132,11 +131,11 @@
                         scope.time.hour(time);
                     }
 
-                    setCrown(scope.time, beat);
+                    calibrate(scope.time, beat);
                 };
 
                 // init
-                setCrown();
+                calibrate();
 			}
 		};
 	}]);
