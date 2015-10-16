@@ -1,0 +1,76 @@
+.time-dial {
+    font-size: 200px;
+    // box-shadow: 0 0 0 .02em inset, 0 0 0 .02em;
+    width: 1em;
+    height: 1em;
+    position: relative;
+    line-height: 1;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: scale(1.05);
+        background: whitesmoke;
+        border: .04em solid;
+        border-radius: 100%;
+    }
+    .lcd {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: "DIN Condensed";
+        user-select: none;
+    }
+    .time {
+        font-size: .3em;
+    }
+    .seconds,
+    .meridiem {
+        font-size: .15em;
+        font-family: "DIN Alternate";
+        text-transform: uppercase;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -25%);
+    }
+    .seconds {
+        bottom: 100%;
+    }
+    .meridiem {
+        top: 100%;
+    }
+    .crown {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 50%;
+        left: 0;
+        transform-origin: bottom center;
+        pointer-events: none;
+        span {
+            border-radius: 100%;
+            width: .15em;
+            height: .15em;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            transform: translate3d(50%, 50%, 0);
+            transform-origin: -.5em -.5em 0;
+            pointer-events: auto;
+        }
+        &.hour span {
+            box-shadow: 0 0 0 .02em;
+            background: whitesmoke;
+        }
+        &.minute span {
+            background: currentColor;
+            box-shadow: 0 0 0 .02em whitesmoke;
+            width: .1em;
+            height: .1em;
+        }
+    }
+}

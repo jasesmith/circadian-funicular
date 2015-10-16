@@ -1,0 +1,83 @@
+.do-this {
+    position: absolute;
+    display: none;
+    z-index: 4;
+    top: 3.5em;
+    right: 1em;
+    bottom: auto;
+    left: auto;
+    padding: .5em 1em;
+    border-radius: 3em;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    text-align: center;
+    background: $active;
+    color: $dark;
+    line-height: 1;
+    box-shadow: 0 .3em 2em -.5em $darker;
+    opacity: .85;
+    &:not(.ng-animate) {
+        transition: 1s;
+    }
+    &::before {
+        content: 'Start here...';
+        font-style: italic;
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 90%;
+        right: .5em;
+        border: .5em solid transparent;
+        border-width: 0 0 1em 1em;
+        border-color: transparent transparent $active transparent;
+        transition: 1s;
+    }
+}
+
+main.main,
+main.add-course {
+    ~ .do-this {
+        display: block;
+    }
+}
+
+.show-main-menu .do-this {
+    top: 12.3em;
+    &::before {
+        content: 'Good! Now this...';
+    }
+    &::after {
+        right:calc(100% - 1.5em);
+        border-width: 0 1em 1em 0;
+    }
+}
+
+
+// main.add-course ~ .do-this {
+// }
+
+main.add-course ~ .do-this {
+    top: 8em;
+	right: 3em;
+    &::before {
+        content: 'Change colors & Add a sticker';
+    }
+    &::after {
+        right:calc(100% - 1.5em);
+        border-width: 0 1em 1em 0;
+    }
+    &.step-2 {
+        top: calc(100% - 4em);
+        right: 1em;
+        &::before {
+            content: 'Save it here!';
+        }
+        &::after {
+            bottom: -.8em;
+            right: 1em;
+            border-width: 0 1em 1em 0;
+            border-color: transparent $active transparent transparent;
+        }
+    }
+}

@@ -1,48 +1,170 @@
-html, body, .wrapper {
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+[ng-click],
+[hm-tap],
+label,
+input,
+textarea,
+select {
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0,0,0, 0);
+    -webkit-tap-highlight-color: transparent; /* For some Androids */
+}
+
+html,
+body {
     overflow: hidden;
-    position: absolute;
+    position: relative;
     margin: 0;
     padding: 0;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    font-family: $base-font;
+    font-size: 5vmin;
+    &.ng-animate {
+        transition: transform $framework-timing;
+    }
 }
 
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    header {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        transition: $transition ease-out;
-        .mark {
-            flex: 1;
-            padding: $gutter/4 $gutter/2;
-            font-size: 1.5em;
+main {
+    @extend %flex-column;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transition: transform $framework-timing;
+    > header {
+        flex: 0 0 auto;
+        @extend %flex-row;
+        text-align: center;
+        padding: 0;
+        z-index: 4;
+        transition: all .2s;
+        > button {
+            flex: 0 0 auto;
+            padding: 0 .5em; // stretch top to bottom from flex-row header
+            &:not([class*="bg-"]) {
+                color: currentColor;
+                background: none;
+            }
         }
     }
-    .workspace {
+    article {
+        &:not(:empty) {
+            flex: 1 1 0px;
+        }
+        @extend %flex-column;
+        @extend %scroller;
+    }
+    section {
+        padding: 0;
+        flex: 0 0 auto;
         position: relative;
-        z-index: 1;
+        font-size: 1rem;
+    }
+    footer {
+        box-shadow: 0 1px 0 0 rgba($light, .1) inset, 0 -1px 0 0 rgba($darker, .1);
+        @include background-stripes(0.075);
+    }
+}
+.main-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 3em;
+    bottom: 0;
+    z-index: 1 !important;
+    @extend %flex-column;
+    transform: translate3d(100%, 0%, 0);
+    transition: transform $framework-timing;
+    header {
+        padding: .8em 1em;
+    }
+    ul {
+        margin: 0;
+        padding: .5em;
+        list-style: none;
         flex: 1;
+        @extend %scroller;
+    }
+    li {
+        padding: .5em;
+        margin: .5em 0;
+        border-radius: 5em;
+    }
+    footer {
+        padding: .8em 1em;
     }
 }
 
-.workspace {
+.show-main-menu  {
+    aside.main-menu {
+        transform: translate3d(0%, 0%, 0);
+    }
+    main {
+        box-shadow: 0 0 0 1vw rgba($darker, .35);
+        transform: translate3d(calc(-100% + 3em), 0%, 0);
+    }
+}
+
+article {
     display: flex;
     flex-direction: row;
-    .main {
-        position: relative;
-        overflow: auto;
-        transition: flex-grow .3s ease-out;
-        flex-grow: 2;
-        flex-shrink: 1;
-        flex-basis: 100%;
-        padding: $gutter;
-        z-index: 1;
+    flex: 0 0 auto;
+    user-select: none;
+
+    &.bg-dark {
+        text-shadow: -1px -1px 0 rgba($darker, .5);
+        header {
+            color: get-color('light-blue', 400);
+            span ~ button {
+                box-shadow: -1px 0 0 0 rgba($lighter, .1);
+                background: rgba($darker, .2);
+            }
+        }
+        button::before {
+            text-shadow: -1px -1px 0 rgba($darker, .5);
+        }
+    }
+}
+
+.close-view {
+    padding: 0;
+    position: absolute;
+    z-index: 5;
+    height: 2.5rem;
+    width: 2.5rem;
+    line-height: 1;
+    border-radius: 100%;
+    background: rgba($light, .2);
+    color: $lighter;
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        padding: 1px .8em;
+        background: currentColor;
+        transform-origin: center;
+    }
+    &::before {
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+    &::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
     }
 }

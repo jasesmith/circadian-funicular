@@ -1,0 +1,90 @@
+// [class*="icon-"] {
+//     position:relative;
+//     &:after,
+//     &:before {
+//         content: '';
+//         display: block;
+//         font-family: $code-font;
+//         position: absolute;
+//         top: 50%;
+//         left: 50%;
+//         border: 0 solid $base-light;
+//     }
+// }
+// .icon-save {
+//     &:before {
+//         border-width: 0 0 .2em .2em;
+//         transform: translate(-50%, -80%) rotate(-45deg);
+//         padding: .4em .4em 0 0;
+//     }
+//     &:after {
+//         border-width:.175em;
+//         // border-style: dotted;
+//         padding: .6em;
+//         border-radius: .3em;
+//         border-top-color: transparent !important;
+//         transform: translate(-50%, -50%);
+//     }
+// }
+// .icon-check:after {
+//     border-width: 0 0 .2em .2em;
+//     transform: translate(-50%, -70%) rotate(-45deg);
+//     padding: .25em .6em 0 0;
+// }
+// .icon-back:after {
+//     border-width: 0 0 .2em .2em;
+//     transform: translate(-50%, -50%) rotate(45deg);
+//     padding: .5em .5em 0 0;
+// }
+// .icon-next:after {
+//     border-width: 0 0 .2em .2em;
+//     transform: translate(-50%, -50%) rotate(-135deg);
+//     padding: .5em .5em 0 0;
+// }
+// .icon-add:after {
+//     content: '+';
+//     font-size: 1.65em;
+//     transform: translate(-50%, -50%);
+// }
+// .icon-minus:after,
+// .icon-cancel:after {
+//     content: '—';
+//     font-size: 1.65em;
+//     transform: translate(-50%, -50%);
+// }
+// .icon-remove:after,
+// .icon-close:after {
+//     content: '+';
+//     font-size: 1.65em;
+//     transform: translate(-50%, -50%) rotate(45deg);
+// }
+// .icon-critical:after {
+//     content: '!';
+//     font-size: 2em;
+//     font-weight: 600;
+//     transform: translate(-50%, -45%) rotate(23deg);
+// }
+// .icon-recycle {
+//     &:after {
+//         border-width:.2em;
+//         padding: .3em;
+//         border-radius: 1em;
+//         border-right-color: transparent !important;
+//         transform: translate(-50%, -50%) rotate(15deg);
+//     }
+//     &:before {
+//         border-width: 0 0 .2em .2em;
+//         transform: translate(-5%, -100%) rotate(-93deg) scale(.8,.8);
+//         padding: .4em .4em 0 0;
+//     }
+// }
+// .icon-burger:after {
+//     content: '\2261';
+//     font-size: 1.65em;
+//     transform: translate(-50%, -50%);
+// }
+// .icon-calendar:after {
+//     border-width: .3em .1em .1em .1em;
+//     padding: .3em .4em;
+//     transform: translate(-50%, -50%);
+// }

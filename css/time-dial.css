@@ -1,0 +1,80 @@
+.time-dial {
+  font-size: 200px;
+  width: 1em;
+  height: 1em;
+  position: relative;
+  line-height: 1; }
+  .time-dial::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    -webkit-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+            transform: scale(1.05);
+    background: whitesmoke;
+    border: .04em solid;
+    border-radius: 100%; }
+  .time-dial .lcd {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    font-family: "DIN Condensed";
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none; }
+  .time-dial .time {
+    font-size: .3em; }
+  .time-dial .seconds,
+  .time-dial .meridiem {
+    font-size: .15em;
+    font-family: "DIN Alternate";
+    text-transform: uppercase;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, -25%);
+        -ms-transform: translate(-50%, -25%);
+            transform: translate(-50%, -25%); }
+  .time-dial .seconds {
+    bottom: 100%; }
+  .time-dial .meridiem {
+    top: 100%; }
+  .time-dial .crown {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 50%;
+    left: 0;
+    -webkit-transform-origin: bottom center;
+        -ms-transform-origin: bottom center;
+            transform-origin: bottom center;
+    pointer-events: none; }
+    .time-dial .crown span {
+      border-radius: 100%;
+      width: .15em;
+      height: .15em;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      -webkit-transform: translate3d(50%, 50%, 0);
+              transform: translate3d(50%, 50%, 0);
+      -webkit-transform-origin: -.5em -.5em 0;
+          -ms-transform-origin: -.5em -.5em 0;
+              transform-origin: -.5em -.5em 0;
+      pointer-events: auto; }
+    .time-dial .crown.hour span {
+      box-shadow: 0 0 0 .02em;
+      background: whitesmoke; }
+    .time-dial .crown.minute span {
+      background: currentColor;
+      box-shadow: 0 0 0 .02em whitesmoke;
+      width: .1em;
+      height: .1em; }
+
+/*# sourceMappingURL=time-dial.css.map */

@@ -1,15 +1,31 @@
 @import 'variables';
+@import 'colors';
+@import 'keyframes';
+@import 'transitions';
 @import 'base';
-@import 'animations';
 @import 'layout';
 @import 'inputs';
-@import 'sortables';
-
-// globals
-@import 'main';
-
-// components
 @import 'content';
 
-// last
-@import 'mediaQueries';
+@import 'flipper';
+@import 'helper';
+@import 'sortables';
+
+.view-is-loading {
+    position: absolute;
+    top: 0;
+    height: 33vh;
+    right: 0;
+    // bottom: 0;
+    left: 0;
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: rgba($dark, .85);
+    color: $base-light;
+    z-index: 100;
+    &.active {
+        display: flex;
+    }
+}

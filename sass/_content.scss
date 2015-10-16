@@ -1,0 +1,30 @@
+.content {
+    position: relative;
+    h1 {
+        font-size: 13vmin;
+        font-weight: 100;
+        margin: 0 10vmin .5rem 10vmin;
+        text-align: center;
+    }
+    h2 {
+        font-weight: 200;
+        margin: 0 0 .5em 0;
+    }
+    h3 {
+        font-weight: 200;
+        margin: .2em 0;
+    }
+    p {
+        margin: 0;
+    }
+    * + p {
+        margin-top: 1.5em;
+    }
+    button.action {
+        border-radius: 100%;
+        padding: 1.65em;
+        + button.action {
+            // margin-left: .5em;
+        }
+    }
+}

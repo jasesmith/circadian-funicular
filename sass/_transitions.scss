@@ -1,0 +1,9 @@
+.ng-enter-active {z-index: 20;}
+.ng-leave-active {z-index: 10;}
+
+// .ng-enter-active,
+// .ng-leave-active {box-shadow: 0 0 2em 0 rgba($darker, .65);}
+
+/* page view animations ------------------------ */
+$animateyIn: $framework-timing both ease-in-out;
+$animateyOut: $framework-timing both ease-in-out;

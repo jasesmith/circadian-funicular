@@ -1,0 +1,41 @@
+.flip-container {
+	perspective: 800;
+    &.flip-me .flipper {
+		transform: rotateY(180deg);
+    }
+}
+
+.flip-container, .front, .back {
+	width: 100vw;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.flipper {
+    font-size: 50vmin;
+	height: 1em;
+	transition: .8s cubic-bezier(1, -0.5, .2, 1.5);// 1s;
+	transform-style: preserve-3d;
+	position: relative;
+    .front, .back {
+    	backface-visibility: hidden;
+    	position: absolute;
+    	top: 0;
+        height: 1em;
+    	left: 50%;
+        transform: translate(-50%, 0%);
+        flex: 1;
+        border-radius: 100%;
+    }
+    .front {
+    	z-index: 2;
+        display: flex;
+        align-items: center;
+    	transform: translate(-50%, 0%) rotateY(0deg); // for firefox 31
+    }
+    .back {
+    	transform: translate(-50%, 0%) rotateY(180deg);
+        width: 1em;
+        // box-shadow: 0 0 0 .05em, 0 0 0 .05em inset, 0 .3em .5em -.1em rgba($darker, .35);
+    }
+}

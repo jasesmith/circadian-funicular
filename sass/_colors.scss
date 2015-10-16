@@ -1,0 +1,102 @@
+.bg-air {background: transparent !important;}
+.bg-light {background: $light !important;color: set-text-color($light) !important; &--sheer {background: rgba($light, .2) !important;}}
+.bg-dark {background: $dark !important;color: set-text-color($dark) !important; &--sheer {background: rgba($dark, .2) !important;}}
+.bg-base {background: $base !important;color: set-text-color($base) !important; &--sheer {background: rgba($base, .2) !important;}}
+.bg-mix {background: $base-mix !important; color: set-text-color($base-mix) !important; &--sheer {background: rgba($base-mix, .2) !important;}}
+.bg-mixed {background: $base-mix !important; color: set-text-color($base-mix) !important; mix-blend-mode:multiply;}
+.bg-frost {background: $base-mix !important; color: set-text-color($base-mix) !important; mix-blend-mode:overlay;}
+.bg-shade {background: $base-shade !important; color: set-text-color($base-shade) !important; &--sheer {background: rgba($base-shade, .2) !important;}}
+.bg-alert {background: $alert !important;  color: set-text-color($alert) !important; &--sheer {background: rgba($alert, .2) !important;}}
+.bg-warning {background: $warning !important;  color: set-text-color($warning) !important; &--sheer {background: rgba($warning, .2) !important;}}
+.bg-success {background: $success !important;  color: set-text-color($success) !important; &--sheer {background: rgba($success, .2) !important;}}
+.bg-info {background: $info !important;  color: set-text-color($info) !important; &--sheer {background: rgba($info, .2) !important;}}
+
+.bg-grey-1 {background: $grey-1 !important; color: set-text-color($grey-1) !important;}
+.bg-grey-2 {background: $grey-2 !important; color: set-text-color($grey-2) !important;}
+.bg-grey-3 {background: $grey-3 !important; color: set-text-color($grey-3) !important;}
+.bg-grey-4 {background: $grey-4 !important; color: set-text-color($grey-4) !important;}
+.bg-grey-5 {background: $grey-5 !important; color: set-text-color($grey-5) !important;}
+.bg-grey-6 {background: $grey-6 !important; color: set-text-color($grey-6) !important;}
+.bg-grey-7 {background: $grey-7 !important; color: set-text-color($grey-7) !important;}
+.bg-grey-8 {background: $grey-8 !important; color: set-text-color($grey-8) !important;}
+.bg-grey-9 {background: $grey-9 !important; color: set-text-color($grey-9) !important;}
+
+.bg-darken {background: rgba($dark, .6) !important;color: set-text-color($dark) !important;}
+.bg-lighten {background: rgba($lighter, .2) !important;color: set-text-color($light) !important;}
+
+.bg-cancel {background: $cancel !important;  color: set-text-color($cancel) !important;}
+.bg-active {background: $active !important;  color: set-text-color($active) !important;}
+
+.fg-air {color: transparent;}
+.fg-light {color: $light;}
+.fg-dark {color: $dark;}
+.fg-base {color: $base;}
+.fg-mix {color: $base-mix;}
+.fg-shade {color: $base-shade;}
+.fg-alert {color: $alert;}
+.fg-warning {color: $warning;}
+.fg-caution {color: $caution;}
+.fg-success {color: $success;}
+.fg-info {color: $info;}
+
+.fg-cancel {color: $cancel;}
+.fg-active {color: $active;}
+
+.glow-alert {text-shadow: 0 0 .6em $alert;}
+.glow-warning {text-shadow: 0 0 .6em $warning;}
+.glow-success {text-shadow: 0 0 .6em $success;}
+.glow-cancel {text-shadow: 0 0 .6em $cancel;}
+.glow-active {text-shadow: 0 0 .6em $active;}
+
+.shadow-alert {box-shadow: 0 0 .6em 0 $alert;}
+.shadow-warning {box-shadow: 0 0 .6em 0 $warning;}
+.shadow-success {box-shadow: 0 0 .6em 0 $success;}
+.shadow-cancel {box-shadow: 0 0 .6em 0 $cancel;}
+.shadow-active {box-shadow: 0 0 .6em 0 $active;}
+
+
+@each $name, $hex in $colors {
+    .fg-#{$name} {
+        color: $hex !important;
+        .tag {
+            box-shadow: 0 0 0 1px $hex !important;
+            &.reversed {
+                background: $hex !important;
+                color: set-text-color($light) !important;
+            }
+        }
+    }
+    .bg-#{$name} {
+        background-color: $hex !important;
+        color: set-text-color($hex) !important;
+         &--sheer {
+             background: rgba($hex, .2) !important;
+         }
+        input {
+            color: set-text-color($hex);
+        }
+        [class*="icon-"],
+        &[class*="icon-"] {
+            &:after,
+            &:before {
+                color: set-text-color($hex);
+                border-color: currentColor;
+            }
+        }
+    }
+    .ui-#{$name} {
+        .bg-active,
+        // button.active,
+        // .button.active,
+        .calendar-wrap {
+            background: $hex !important;
+            color: set-text-color($hex) !important;
+        }
+        .fg-active {
+            color: $hex !important;
+        }
+        input[type="checkbox"].toggle:checked {
+            background: $hex !important;
+        }
+    }
+}

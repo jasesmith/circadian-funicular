@@ -1,1 +1,18 @@
-Hello World!
+
+<div class="flex-1 flex-column">
+    <div class="flex-row flex-none">
+        <div class="flex-1">
+            <input type="range" min="1" max="100" ng-model="diameter" style="width:100%" />
+        </div>
+        <div>
+            {{diameter}}
+        </div>
+    </div>
+    <div class="flex-2 flex-row justify-content-around align-items-center">
+        <time-dial time="time" diameter="diameter" unit="unit"></time-dial>
+        <time-dial time="time2" diameter="diameter" unit="unit"></time-dial>
+    </div>
+    <div>
+        {{time | date:'shortTime'}}
+    </div>
+</div>

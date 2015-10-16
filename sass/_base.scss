@@ -1,50 +1,183 @@
-html,
-body {
-    background: $light;
-    color: $dark;
-    margin: 0;
-    padding: 0;
-    font-family: $base-font;
-    font-size: 16px;
+.block {display: block;}
+.flex {display: flex;}
+.flex-wrap {flex-wrap: wrap;}
+.flex-row {@extend %flex-row;}
+.flex-column {@extend %flex-column;}
+
+.flex-none {flex: none !important;}
+.flex-1-1-auto {flex: 1 1 auto !important;}
+.flex-1-0-auto {flex: 1 0 auto !important;}
+.flex-0-1-auto {flex: 0 1 auto !important;}
+.flex-0-0-auto {flex: 0 0 auto !important;}
+.flex-0 {flex: 0;}
+.flex-1-all > *,
+.flex-1 {flex: 1;}
+.flex-2 {flex: 2;}
+.flex-3 {flex: 3;}
+.flex-4 {flex: 4;}
+.flex-5 {flex: 5;}
+.flex-6 {flex: 6;}
+.flex-7 {flex: 7;}
+.flex-8 {flex: 8;}
+.flex-9 {flex: 9;}
+.flex-10 {flex: 10;}
+.flex-11 {flex: 11;}
+.flex-12 {flex: 12;}
+
+.justify-content-center {justify-content: center;}
+.justify-content-start {justify-content: flex-start;}
+.justify-content-end {justify-content: flex-end;}
+.justify-content-around {justify-content: space-around;}
+.justify-content-between {justify-content: space-between;}
+.align-items-center {align-items: center;}
+.align-items-start {align-items: flex-start;}
+.align-items-end {align-items: flex-end;}
+.align-items-stretch {align-items: stretch;}
+.align-items-baseline {align-items: baseline;}
+.align-self-center {align-self: center;}
+.align-self-start {align-self: flex-start;}
+.align-self-end {align-self: flex-end;}
+.align-self-stretch {align-self: stretch;}
+.align-self-baseline {align-self: baseline;}
+
+.text-left {text-align: left;}
+.text-center {text-align: center;}
+.text-right {text-align: right;}
+
+.ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: auto;
 }
 
-*, *:before, *:after {box-sizing: border-box;}
+.nowrap {white-space: nowrap;}
+.clickless {pointer-events: none;}
 
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-    display: none !important;
+.title-case {text-transform: capitalize;}
+.lower-case {text-transform: lowercase;}
+.upper-case {text-transform: uppercase;}
+
+.display-none {display:none;}
+
+.hidden {visibility:hidden;}
+
+.shadow {opacity: .65;}
+.ghost {opacity: .35;}
+.vapor {opacity: .1;}
+.sub-space,
+.invisible {opacity: 0;}
+
+.padless {padding: 0;}
+.pad-half {padding: .5em !important;}
+.pad-x-half {padding-left: .5em !important;padding-right: .5em !important;}
+.pad-y-half {padding-top: .5em !important;padding-bottom: .5em !important;}
+.pad-top-half {padding-top: .5em !important;}
+.pad-right-half {padding-right: .5em !important;}
+.pad-bottom-half {padding-bottom: .5em !important;}
+.pad-left-half {padding-left: .5em !important;}
+
+.pad-0 {padding: 0 !important;}
+.pad-top-0 {padding-top: 0 !important;}
+.pad-right-0 {padding-right: 0 !important;}
+.pad-bottom-0 {padding-bottom: 0 !important;}
+.pad-left-0 {padding-left: 0 !important;}
+.pad-x-0 {padding-left: 0 !important;padding-right: 0 !important;}
+.pad-y-0 {padding-top: 0 !important;padding-bottom: 0 !important;}
+
+.pad-1 {padding: 1em !important;}
+.pad-top-1 {padding-top: 1em !important;}
+.pad-right-1 {padding-right: 1em !important;}
+.pad-bottom-1 {padding-bottom: 1em !important;}
+.pad-left-1 {padding-left: 1em !important;}
+.pad-x-1 {padding-left: 1em !important;padding-right: 1em !important;}
+.pad-y-1 {padding-top: 1em !important;padding-bottom: 1em !important;}
+
+.pad-2 {padding: 2em !important;}
+.pad-top-2 {padding-top: 2em !important;}
+.pad-right-2 {padding-right: 2em !important;}
+.pad-bottom-2 {padding-bottom: 2em !important;}
+.pad-left-2 {padding-left: 2em !important;}
+.pad-x-2 {padding-left: 2em !important;padding-right: 2em !important;}
+.pad-y-2 {padding-top: 2em !important;padding-bottom: 2em !important;}
+
+.borderless {border: 0;}
+
+.border-1 {box-shadow: 0 0 0 1px inset !important;}
+.border-2 {box-shadow: 0 0 0 2px inset !important;}
+
+.nudge-left {
+    margin-right: 2px !important;
+}
+.nudge-right {
+    margin-left: 2px !important;
+}
+.nudge-top {
+    margin-bottom: 2px !important;
+}
+.nudge-bottom {
+    margin-top: 2px !important;
 }
 
-[ng-click] {
-    -webkit-tap-highlight-color: rgba(0,0,0, 0);
-    -webkit-tap-highlight-color: transparent; /* For some Androids */
+.rotate-0 {transform: rotate(0deg);}
+.rotate-15 {transform: rotate(15deg);}
+.rotate-30 {transform: rotate(30deg);}
+.rotate-45 {transform: rotate(45deg);}
+.rotate-60 {transform: rotate(60deg);}
+.rotate-75 {transform: rotate(75deg);}
+
+.rotate-90 {transform: rotate(90deg);}
+.rotate-105 {transform: rotate(105deg);}
+.rotate-120 {transform: rotate(120deg);}
+.rotate-135 {transform: rotate(135deg);}
+.rotate-150 {transform: rotate(150deg);}
+.rotate-165 {transform: rotate(165deg);}
+
+.rotate-180 {transform: rotate(180deg);}
+.rotate-195 {transform: rotate(195deg);}
+.rotate-210 {transform: rotate(210deg);}
+.rotate-225 {transform: rotate(225deg);}
+.rotate-240 {transform: rotate(240deg);}
+.rotate-255 {transform: rotate(255deg);}
+
+.rotate-270 {transform: rotate(270deg);}
+.rotate-285 {transform: rotate(285deg);}
+.rotate-300 {transform: rotate(300deg);}
+.rotate-315 {transform: rotate(315deg);}
+.rotate-330 {transform: rotate(330deg);}
+.rotate-345 {transform: rotate(345deg);}
+
+.rotate-360 {transform: rotate(360deg);}
+
+.animated {
+    transition: all .3s ease-in-out;
 }
 
-h1, h2, h3, h4, h5 ,h6, p, ul, ol {
-    padding: 0;
-    margin: 0;
-    + h1, + h2, + h3, + h4, + h5, + h6, + p, + ul, + ol {
-        margin-top: 1.5em;
+.has-pointer {
+    position: relative;
+    &::after {
+        content: '';
+        border: 0 solid transparent;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 0 .65rem .5rem .65rem;
+        border-bottom-color: $lighter;
     }
 }
 
-p {
-    text-align: justify;
-    line-height: 1.4;
+a,
+a:visited {
+    color: currentColor;
+    text-decoration: none;
 }
 
-.subtext {
+.small,
+pre {
     font-size: .7em;
-    opacity: .5;
 }
 
-.left-text {text-align:left;}
-.center-text {text-align:center;}
-.right-text {text-align:right;}
-
-// colorize
-.wrapper {
-    header {
-        background: $active;
-        color: $light;
-    }
+::-webkit-input-placeholder {
+    font-style: italic;
+    opacity:.35;
 }

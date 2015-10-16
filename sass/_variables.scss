@@ -1,40 +1,105 @@
-// vars
-$dark: #363639;
-$light: #FFF;
-$active: #3CF;
-$transition: all .3s;
-$gutter: 2rem;
+// @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
 
 $base-font: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif;
+$serif-font: serif; //Georgia, 'Times New Roman', serif;
 $code-font: Consolas, Monaco, 'Andale Mono', monospace;
 
-// functions
-@function contrast-color($color) {
-    @return color-contrast($color);
-}
+$framework-timing: .3s;
 
-// from: http://codepen.io/bluesaunders/details/FCLaz
-// Calculeate brightness of a given color.
-@function brightness($color) {
-  @return ((red($color) * .299) + (green($color) * .587) + (blue($color) * .114)) / 255 * 100%;
-}
+$colors: (
+  'deepred': #b31c1f,
+  'red': #e43336,
+  'pink': #f06292,
+  'deeppink': #ff4081,
+  'purple': #ab47bc,
+  'deeppurple': #7e57c2,
+  'indigo': #5c6bc0,
+  'blue': #42a5f5,
+  'lightblue': #29b6f6,
+  'cyan': #26c6da,
+  'teal': #26a69a,
+  'green': #66bb6a,
+  'lightgreen': #9ccc65,
+  'lime': #d4e157,
+  'yellow': #ffee58,
+  'amber': #ffca28,
+  'deepamber': #f9a825,
+  'orange': #ff9800,
+  'deeporange': #ff7043,
+  'brown': #8d6e63,
+  'deepbrown': #795548,
+  'chocolate': #4E342E,
+  'bluegrey': #78909c,
+  'deepgrey': #546E7A
+);
 
-// Compares contrast of a given color to the light/dark arguments and returns whichever is most "contrasty"
-@function color-contrast($color, $dark: $dark-text-default, $light: $light-text-default) {
-  @if $color == null {
-    @return null;
-  }
-  @else {
-    $color-brightness: brightness($color);
-    $light-text-brightness: brightness($light);
-    $dark-text-brightness: brightness($dark);
+$dark: #23292C;
+$darker: mix($dark, #000, 50%);
+$light: #E2E4E6;
+$lighter: mix($light, #fff, 40%);
+$base: #00BCD4;
+$base-dark: mix(#000, $base, 25%);
+$base-light: mix(#fff, $base, 25%);
+$base-mix: mix($dark, $light, 70%);
+$base-shade: mix($dark, $light, 85%);
 
-    @return if(abs($color-brightness - $light-text-brightness) > abs($color-brightness - $dark-text-brightness), $light, $dark);
-  }
-}
+$grey-1: mix($dark, $light, 10%);
+$grey-2: mix($dark, $light, 20%);
+$grey-3: mix($dark, $light, 30%);
+$grey-4: mix($dark, $light, 40%);
+$grey-5: mix($dark, $light, 50%);
+$grey-6: mix($dark, $light, 60%);
+$grey-7: mix($dark, $light, 70%);
+$grey-8: mix($dark, $light, 80%);
+$grey-9: mix($dark, $light, 90%);
 
-// mixins
+$rank-none: $grey-8;
+$rank-low: #cddc39;
+$rank-med: #00BCD4;
+$rank-high: #ff5722;
+
+// states
+$alert: #f06292;
+$warning: #f9a825;
+$caution: #fdd835;
+$success: #9ccc65; //#689F38;
+$info: #26c6da;
+$cancel: $base-dark;
+$active: $base-light;
+
 @mixin background-stripes($alpha:0.05, $angle:-45deg) {
-    background-size: 1rem 1rem;
-    background-image: linear-gradient($angle, rgba(#FFF, $alpha) 25%, transparent 25%, transparent 50%, rgba(#FFF, $alpha) 50%, rgba(#FFF, $alpha) 75%, transparent 75%, transparent);
+    background-size: .5rem .5rem;
+    background-image: linear-gradient($angle, rgba($lighter, $alpha) 25%, transparent 25%, transparent 50%, rgba($lighter, $alpha) 50%, rgba($lighter, $alpha) 75%, transparent 75%, transparent);
+}
+
+@mixin scroller($dir:both) {
+    @if($dir == both) {
+        overflow: auto;
+    } @elseif($dir == x) {
+        overflow-x: auto;
+    } @elseif($dir == y) {
+        overflow-y: auto;
+    }
+    -webkit-overflow-scrolling: touch;
+}
+
+@function set-text-color($color, $threshhold: 55%) {
+    @if(lightness($color) > $threshhold) {
+        @return $dark; // Lighter background, return dark color
+    } @else {
+        @return $lighter; // Darker background, return light color
+    }
+}
+
+%scroller {
+    @include scroller(both);
+}
+
+%flex-row {
+    display: flex;
+    flex-direction: row;
+}
+%flex-column {
+    display: flex;
+    flex-direction: column;
 }
