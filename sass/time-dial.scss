@@ -24,6 +24,9 @@
         transform: translate(-50%, -50%);
         font-family: "DIN Condensed";
         user-select: none;
+        small {
+            font-size: .65em;
+        }
     }
     .time {
         font-size: .3em;
@@ -53,8 +56,6 @@
         pointer-events: none;
         span {
             border-radius: 100%;
-            width: .15em;
-            height: .15em;
             position: absolute;
             bottom: 0;
             right: 0;
@@ -65,12 +66,14 @@
         &.hour span {
             box-shadow: 0 0 0 .02em;
             background: whitesmoke;
+            width: .15em;
+            height: .15em;
         }
         &.minute span {
             background: currentColor;
             box-shadow: 0 0 0 .02em whitesmoke;
-            width: .1em;
-            height: .1em;
+            width: .125em;
+            height: .125em;
         }
     }
 }

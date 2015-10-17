@@ -35,7 +35,7 @@
     </head>
     <body class="ui-primary {{view}}">
 
-        <div class="wrapper" ng-cloak>
+        <main class="wrapper" ng-cloak>
 
             <header class="" ng-if="headline || icon">
 
@@ -46,11 +46,9 @@
 
             </header>
 
-            <div class="workspace">
+            <article class="workspace {{view}}" ui-view>
 
-                <main class="{{view}}" ui-view></main>
-
-            </div>
+            </article>
         </div>
 
     </body>

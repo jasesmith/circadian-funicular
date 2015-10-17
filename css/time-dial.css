@@ -29,6 +29,8 @@
        -moz-user-select: none;
         -ms-user-select: none;
             user-select: none; }
+    .time-dial .lcd small {
+      font-size: .65em; }
   .time-dial .time {
     font-size: .3em; }
   .time-dial .seconds,
@@ -57,8 +59,6 @@
     pointer-events: none; }
     .time-dial .crown span {
       border-radius: 100%;
-      width: .15em;
-      height: .15em;
       position: absolute;
       bottom: 0;
       right: 0;
@@ -70,11 +70,13 @@
       pointer-events: auto; }
     .time-dial .crown.hour span {
       box-shadow: 0 0 0 .02em;
-      background: whitesmoke; }
+      background: whitesmoke;
+      width: .15em;
+      height: .15em; }
     .time-dial .crown.minute span {
       background: currentColor;
       box-shadow: 0 0 0 .02em whitesmoke;
-      width: .1em;
-      height: .1em; }
+      width: .125em;
+      height: .125em; }
 
 /*# sourceMappingURL=time-dial.css.map */

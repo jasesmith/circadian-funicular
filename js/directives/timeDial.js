@@ -1,52 +1,52 @@
 (function($angular, $moment){
 	'use strict';
 
+    // helpers
+    var _getNumbers = function(target){
+        var numbers = {};
+        if(target) {
+            numbers = {
+                t: target.offsetTop,
+                r: target.offsetLeft + target.offsetWidth,
+                b: target.offsetTop + target.offsetHeight,
+                l: target.offsetLeft,
+                w: target.offsetWidth,
+                h: target.offsetHeight,
+            };
+            // find x|y center
+            numbers.cx = (numbers.l + (numbers.w/2));
+            numbers.cy = (numbers.t + (numbers.h/2));
+        }
+        return numbers;
+    };
+
+    var _getDeg = function(mouse, b){
+        var barrel = _getNumbers(b);
+        var radians = Math.atan2((mouse.clientY - barrel.cy), (mouse.clientX - barrel.cx));
+        var degrees = Math.round(radians * 180 / Math.PI);
+        return degrees;
+    };
+
+    var _rotate = function(el, degrees){
+        $angular.element(el).css({
+            transform: 'rotate(' + degrees + 'deg)'
+        });
+    };
+
+    var _timeCalc = function(degree, beat){
+        var t, decimal = 3 + (1/30) * (degree % 360);
+        decimal = decimal < 0 ? decimal + 12 : decimal;
+
+        t = parseInt(decimal);
+        if(beat === 'm') {
+            t = parseInt(decimal * 5) % 60;
+        }
+
+        return t;
+    };
+
 	$angular.module('app')
-	.directive('timeDial', [function() {
-
-        var _getNumbers = function(target){
-            var numbers = {};
-            if(target) {
-                numbers = {
-                    t: target.offsetTop,
-                    r: target.offsetLeft + target.offsetWidth,
-                    b: target.offsetTop + target.offsetHeight,
-                    l: target.offsetLeft,
-                    w: target.offsetWidth,
-                    h: target.offsetHeight,
-                };
-                // find x|y center
-                numbers.cx = (numbers.l + (numbers.w/2));
-                numbers.cy = (numbers.t + (numbers.h/2));
-            }
-            return numbers;
-        };
-
-        var _getDeg = function(mouse, b){
-            var barrel = _getNumbers(b);
-            var radians = Math.atan2((mouse.clientY - barrel.cy), (mouse.clientX - barrel.cx));
-            var degrees = Math.round(radians * 180 / Math.PI);
-            return degrees;
-        };
-
-        var _rotate = function(el, degrees){
-            $angular.element(el).css({
-                transform: 'rotate(' + degrees + 'deg)'
-            });
-        };
-
-        var _timeCalc = function(degree, beat){
-            var t, decimal = 3 + (1/30) * (degree % 360);
-            decimal = decimal < 0 ? decimal + 12 : decimal;
-
-            t = parseInt(decimal);
-            if(beat === 'm') {
-                t = parseInt(decimal * 5) % 60;
-            }
-
-            return t;
-        };
-
+	.directive('timeDial', ['$interval', function($interval) {
         return {
 			restrict: 'E',
 			replace: true,
@@ -57,16 +57,16 @@
                 unit: '=?'
 			},
 
-			template: '' +
-                '<div class="time-dial barrel" ng-style="styleMe(unit)">' +
+			template: '<div>' +
+                '<div class="time-dial barrel" ng-style="size(unit)">' +
                     '<div class="lcd" hm-tap="toggleMeridiem()">' +
-                        '<div class="time">{{format(time)|date:\'h\'}}:{{format(time)|date:\'mm\'}}</div>' +
+                        '<div class="time">{{format(time)|date:\'h:mm\'}}</div>' +
                         '<div class="meridiem">{{format(time)|date:\'a\'}}</div>' +
                     '</div>' +
                     '<div class="crown hour"><span hm-pan="setCrown($event, \'h\')"></span></div>' +
                     '<div class="crown minute"><span hm-pan="setCrown($event, \'m\')"></span></div>' +
                 '</div>' +
-                '',
+                '</div>',
 
 			link: function(scope, element) {
 
@@ -102,7 +102,7 @@
                       return new Date(datetime);
                 };
 
-                scope.styleMe = function(unit){
+                scope.size = function(unit){
                     unit = !unit ? 'vmin' : unit; // vmin: viewport smallest dimension
                     return { fontSize: scope.diameter + unit};
                 };
@@ -119,16 +119,28 @@
 
                 scope.setCrown = function(e, beat){
                     var degrees = _getDeg(e.pointers[0], element[0]);
-                    var time = _timeCalc(degrees, beat);
+                    var tick = _timeCalc(degrees, beat);
+                    var t = scope.time; // storing for natural progression
 
                     if(beat === 'm') {
-                        scope.time.minute(time);
-                        calibrate(scope.time, 'h');
+                        scope.time.minute(tick);
+
+                        if(tick === 0 && scope.prevTick === 59) {
+                            t = scope.time.add(1, 'hour');
+                        }
+                        if(scope.prevTick === 0 && tick === 59) {
+                            t = scope.time.subtract(1, 'hour');
+                        }
+
+                        calibrate(t, 'h');
+                        scope.prevTick = tick;
                     } else {
                         if(scope.meridiem === 'pm') {
-                            time += 12;
+                            tick += 12;
                         }
-                        scope.time.hour(time);
+
+                        scope.time.hour(tick);
+                        // _rotate(crownHour, degrees); // smooth move
                     }
 
                     calibrate(scope.time, beat);
@@ -136,6 +148,10 @@
 
                 // init
                 calibrate();
+                // $interval(function(){
+                //     scope.time = $moment();
+                //     calibrate(scope.time);
+                // }, 500);
 			}
 		};
 	}]);

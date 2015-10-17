@@ -9,10 +9,10 @@
         </div>
     </div>
     <div class="flex-2 flex-row justify-content-around align-items-center">
-        <time-dial time="time" diameter="diameter" unit="unit"></time-dial>
-        <time-dial time="time2" diameter="diameter" unit="unit"></time-dial>
+        <time-dial time="time" diameter="diameter" unit="unit" mode="mode"></time-dial>
+        <!-- <time-dial time="time2" diameter="diameter" unit="unit" mode="mode"></time-dial> -->
     </div>
-    <div>
-        {{time | date:'shortTime'}}
+    <div class="flex-1 flex-row justify-content-around">
+        <div>{{format(time) | date:'MMM d, y h:mm a'}}</div>
     </div>
 </div>
