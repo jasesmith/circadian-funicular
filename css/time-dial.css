@@ -79,4 +79,25 @@
       width: .125em;
       height: .125em; }
 
+.time-dial.clock-mode .time span {
+  -webkit-animation: fadeIn alternate .5s linear infinite;
+          animation: fadeIn alternate .5s linear infinite; }
+.time-dial.clock-mode .crown {
+  -webkit-transition: .3s linear;
+          transition: .3s linear; }
+  .time-dial.clock-mode .crown::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    padding: .01em;
+    background-color: red;
+    -webkit-transform: translateY(50%);
+        -ms-transform: translateY(50%);
+            transform: translateY(50%); }
+
+.x-ray .crown {
+  background: rgba(0, 0, 0, 0.2); }
+
 /*# sourceMappingURL=time-dial.css.map */

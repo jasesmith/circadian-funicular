@@ -162,7 +162,7 @@ input {
             &::-webkit-slider-thumb {
                 -webkit-appearance: none;
                 background: $base-light;
-                transform: scale(3, 3);
+                transform: scale(1.5, 1.5);
                 box-shadow: 0 0 1em 0 $darker;
             }
         }

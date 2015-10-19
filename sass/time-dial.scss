@@ -77,3 +77,26 @@
         }
     }
 }
+
+.time-dial.clock-mode {
+    .time span {
+        animation: fadeIn alternate .5s linear infinite;
+    }
+    .crown {
+        transition: .3s linear;
+        &::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 50%;
+            padding: .01em;
+            background-color: red;
+            transform: translateY(50%);
+        }
+    }
+}
+
+.x-ray .crown {
+    background: rgba(#000, .2);
+}

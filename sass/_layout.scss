@@ -50,9 +50,10 @@ main {
         flex: 0 0 auto;
         @extend %flex-row;
         text-align: center;
-        padding: 0;
+        padding: 1em;
         z-index: 4;
         transition: all .2s;
+        font-size: 5.5vmin;
         > button {
             flex: 0 0 auto;
             padding: 0 .5em; // stretch top to bottom from flex-row header

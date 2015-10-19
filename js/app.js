@@ -16,7 +16,7 @@
         $scope.viewIsLoading = false;
 
         $scope.headline = 'Circadian Funicular';
-        $scope.icon = 'circle-o-notch';
+        $scope.icon = 'clock-o';
 
         $scope.init = function(){
             $scope.view = $state.current.name;

@@ -54,13 +54,16 @@
 			scope: {
 				time: '=?',
                 diameter: '=?',
-                unit: '=?'
+                unit: '=?',
+                mode: '@'
 			},
 
 			template: '<div>' +
-                '<div class="time-dial barrel" ng-style="size(unit)">' +
+                '<div class="time-dial barrel" ng-class="{\'clock-mode\': mode == \'tell\'}" ng-style="size(unit)">' +
                     '<div class="lcd" hm-tap="toggleMeridiem()">' +
-                        '<div class="time">{{format(time)|date:\'h:mm\'}}</div>' +
+                        '<div class="seconds" ng-if="mode==\'tell\'">{{format(time)|date:\'ss\'}}</div>' +
+                        '<div class="seconds" ng-if="mode!=\'tell\'">{{prevTick}}/{{rev}}</div>' +
+                        '<div class="time">{{format(time)|date:\'h\'}}<span>:</span>{{format(time)|date:\'mm\'}}</div>' +
                         '<div class="meridiem">{{format(time)|date:\'a\'}}</div>' +
                     '</div>' +
                     '<div class="crown hour"><span hm-pan="setCrown($event, \'h\')"></span></div>' +
@@ -73,6 +76,12 @@
                 if(!scope.time) {
                     scope.time = $moment(); // current time
                 }
+
+                if(!scope.mode) {
+                    scope.mode = 'set'; // current time
+                }
+
+                scope.rev = 0;
 
                 var crownMinute = $angular.element(element.find('.minute'));
                 var crownHour = $angular.element(element.find('.hour'));
@@ -121,37 +130,57 @@
                     var degrees = _getDeg(e.pointers[0], element[0]);
                     var tick = _timeCalc(degrees, beat);
                     var t = scope.time; // storing for natural progression
+					var h = scope.time.hour();
 
                     if(beat === 'm') {
                         scope.time.minute(tick);
 
-                        if(tick === 0 && scope.prevTick === 59) {
+						// going forwards
+                        if(scope.prevTick === 59 && tick === 0) {
                             t = scope.time.add(1, 'hour');
                         }
+
+						// going backwards
                         if(scope.prevTick === 0 && tick === 59) {
                             t = scope.time.subtract(1, 'hour');
                         }
 
                         calibrate(t, 'h');
-                        scope.prevTick = tick;
                     } else {
-                        if(scope.meridiem === 'pm') {
+						tick = h > 11 ? tick + 12 : tick;
+
+                        // going forwards
+                        if(scope.prevTick === 11 && tick === 0) {
+							tick += 12;
+                        } else if(scope.prevTick === 23 && tick === 12) {
+                            scope.time.add(1, 'day');
+                            tick -= 12;
+                        }
+
+                        // going backwards
+						if(scope.prevTick === 12 && tick === 23) {
+                            tick -= 12;
+                        } else if(scope.prevTick === 0 && tick === 11) {
+                            scope.time.subtract(1, 'day');
                             tick += 12;
                         }
 
-                        scope.time.hour(tick);
                         // _rotate(crownHour, degrees); // smooth move
+                        scope.time.hour(tick);
                     }
 
                     calibrate(scope.time, beat);
+                    scope.prevTick = tick;
                 };
 
                 // init
                 calibrate();
-                // $interval(function(){
-                //     scope.time = $moment();
-                //     calibrate(scope.time);
-                // }, 500);
+                if(scope.mode === 'tell') {
+                    $interval(function(){
+                        scope.time = $moment();
+                        calibrate(scope.time);
+                    }, 500);
+                }
 			}
 		};
 	}]);

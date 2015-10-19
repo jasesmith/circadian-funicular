@@ -1775,10 +1775,11 @@ main {
         -ms-flex: 0 0 auto;
             flex: 0 0 auto;
     text-align: center;
-    padding: 0;
+    padding: 1em;
     z-index: 4;
     -webkit-transition: all .2s;
-            transition: all .2s; }
+            transition: all .2s;
+    font-size: 5.5vmin; }
     main > header > button {
       -webkit-box-flex: 0;
       -webkit-flex: 0 0 auto;
@@ -2055,8 +2056,8 @@ input[type="range"] {
   input[type="range"]:focus::-webkit-slider-thumb, input[type="range"]:active::-webkit-slider-thumb {
     -webkit-appearance: none;
     background: #40cddf;
-    -webkit-transform: scale(3, 3);
-            transform: scale(3, 3);
+    -webkit-transform: scale(1.5, 1.5);
+            transform: scale(1.5, 1.5);
     box-shadow: 0 0 1em 0 #121516; }
 
 textarea {
@@ -2648,6 +2649,10 @@ main.add-course ~ .do-this {
       font-size: 1em;
       border-radius: 100%;
       font-family: 'FontAwesome'; }
+
+main > header:not([class*="bg-"]) {
+  background: #00BCD4;
+  color: #f3f4f5; }
 
 .view-is-loading {
   position: absolute;
