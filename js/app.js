@@ -4,9 +4,7 @@
     $angular.module('app', [
         'jamfu',
         'ui.router',
-        'as.sortable',
-        'hmTouchEvents',
-        'ngAnimate'
+        'hmTouchEvents'
     ])
     .controller('appController', [
         '$scope', '$state', '$location', '$timeout', 'system', 'AccountService', 'StorageService', 'UtilityService', function(

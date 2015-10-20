@@ -33,7 +33,7 @@
     }
     .seconds,
     .meridiem {
-        font-size: .15em;
+        font-size: .125em;
         font-family: "DIN Alternate";
         text-transform: uppercase;
         position: absolute;
@@ -49,17 +49,17 @@
     .crown {
         position: absolute;
         top: 0;
-        right: 0;
-        bottom: 50%;
+        right: 50%;
+        bottom: 0;
         left: 0;
-        transform-origin: bottom center;
+        transform-origin: right center;
         pointer-events: none;
         span {
             border-radius: 100%;
             position: absolute;
-            bottom: 0;
+            top: 0;
             right: 0;
-            transform: translate3d(50%, 50%, 0);
+            transform: translate3d(50%, -50%, 0);
             transform-origin: -.5em -.5em 0;
             pointer-events: auto;
         }
@@ -87,12 +87,16 @@
         &::after {
             content: '';
             position: absolute;
-            right: 0;
-            bottom: 0;
-            width: 50%;
+            left: 100%;
+            top: 0;
+            height: 40%;
             padding: .01em;
             background-color: red;
-            transform: translateY(50%);
+            transform: translateX(-50%);
+            border-radius: .2em;
+        }
+        &.hour::after {
+            padding: .015em;
         }
     }
 }

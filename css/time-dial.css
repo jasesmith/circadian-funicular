@@ -35,7 +35,7 @@
     font-size: .3em; }
   .time-dial .seconds,
   .time-dial .meridiem {
-    font-size: .15em;
+    font-size: .125em;
     font-family: "DIN Alternate";
     text-transform: uppercase;
     position: absolute;
@@ -50,20 +50,20 @@
   .time-dial .crown {
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 50%;
+    right: 50%;
+    bottom: 0;
     left: 0;
-    -webkit-transform-origin: bottom center;
-        -ms-transform-origin: bottom center;
-            transform-origin: bottom center;
+    -webkit-transform-origin: right center;
+        -ms-transform-origin: right center;
+            transform-origin: right center;
     pointer-events: none; }
     .time-dial .crown span {
       border-radius: 100%;
       position: absolute;
-      bottom: 0;
+      top: 0;
       right: 0;
-      -webkit-transform: translate3d(50%, 50%, 0);
-              transform: translate3d(50%, 50%, 0);
+      -webkit-transform: translate3d(50%, -50%, 0);
+              transform: translate3d(50%, -50%, 0);
       -webkit-transform-origin: -.5em -.5em 0;
           -ms-transform-origin: -.5em -.5em 0;
               transform-origin: -.5em -.5em 0;
@@ -88,14 +88,17 @@
   .time-dial.clock-mode .crown::after {
     content: '';
     position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 50%;
+    left: 100%;
+    top: 0;
+    height: 40%;
     padding: .01em;
     background-color: red;
-    -webkit-transform: translateY(50%);
-        -ms-transform: translateY(50%);
-            transform: translateY(50%); }
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+    border-radius: .2em; }
+  .time-dial.clock-mode .crown.hour::after {
+    padding: .015em; }
 
 .x-ray .crown {
   background: rgba(0, 0, 0, 0.2); }
