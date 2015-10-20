@@ -1,25 +1,16 @@
-<div class="flex-1 flex-column">
-    <div class="flex-row flex-none justify-content-between pad-1">
-        <div class="flex-row flex-1">
-            <div>
-                Size
-            </div>
-            <div class="flex-2 pad-x-half">
-                <input type="range" min="1" max="100" ng-model="diameter" style="width:100%" />
-            </div>
-            <div class="flex-1">
-                {{diameter}}
-            </div>
+<div class="flex-1 flex-column pad-half">
+    <div class="flex-row flex-none justify-content-between">
+        <div class="flex-1">
+            <input type="range" min="10" max="90" ng-model="diameter" style="width:100%" />
         </div>
-        <div>
+        <div class="pad-left-1">
             <label><input type="checkbox" class="toggle" ng-model="xRay" /> X-Ray</label>
         </div>
     </div>
-    <div class="flex-2 flex-row justify-content-around align-items-center" ng-class="{'x-ray': xRay}">
+    <div class="flex-2 flex-row justify-content-around align-items-center pad-2" ng-class="{'x-ray': xRay}">
         <time-dial time="time" diameter="diameter" unit="unit"></time-dial>
-        <!-- <time-dial time="time2" diameter="diameter" unit="unit" mode="mode"></time-dial> -->
     </div>
-    <div class="flex-none flex-row justify-content-around" ng-if="xRay">
+    <div class="flex-none flex-row justify-content-around">
         <div>{{format(time) | date: 'short'}}</div>
     </div>
 </div>

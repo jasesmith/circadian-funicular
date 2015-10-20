@@ -3,7 +3,7 @@
 
     $angular.module('app')
     .controller('mainController', ['$scope', '$timeout', 'StorageService', 'UtilityService', function($scope, $timeout, storage, utils){
-        $scope.diameter = 65;
+        $scope.diameter = 50;
         $scope.unit = 'vmin';
         // $scope.mode = 'set';
         // $scope.xRay = true;
