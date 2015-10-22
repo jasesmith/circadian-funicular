@@ -1,10 +1,17 @@
 .time-dial {
-    font-size: 200px;
-    // box-shadow: 0 0 0 .02em inset, 0 0 0 .02em;
+    $outline: .015em;
+    $-outline: -.015em;
+    $outline-color: white;
+    $accent-color: #10cddf;
+
+    font-size: 300px;
     width: 1em;
     height: 1em;
     position: relative;
     line-height: 1;
+	color: inherit;
+    background: rgba(#fff, .3);
+    border-radius: 100%;
     &::before {
         content: '';
         position: absolute;
@@ -13,7 +20,6 @@
         bottom: 0;
         left: 0;
         transform: scale(1.05);
-        background: whitesmoke;
         border: .04em solid;
         border-radius: 100%;
     }
@@ -22,29 +28,43 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-family: "DIN Condensed";
+        font-size: 80%;
+        font-family: "DIN Condensed", Impact, Helvetica, sans-serif;
         user-select: none;
-        small {
-            font-size: .65em;
-        }
+        transition: top .3s ease-out, font-size .3s ease-out;
+		text-shadow:
+				$outline $-outline 0 $outline-color,
+				$-outline $outline 0 $outline-color,
+				$outline $outline 0 $outline-color,
+				$-outline $-outline 0 $outline-color,
+
+				$-outline 0 0 $outline-color,
+				$outline 0 0 $outline-color,
+				0 $outline 0 $outline-color,
+				0 $-outline 0 $outline-color;
     }
     .time {
-        font-size: .3em;
+        font-size: 35%;
+		span {
+			position: relative;
+			z-index: 1;
+		}
     }
     .seconds,
     .meridiem {
-        font-size: .125em;
-        font-family: "DIN Alternate";
+        font-size: 15%;
+        font-family: "DIN Alternate", Helvetica, sans-serif;
         text-transform: uppercase;
         position: absolute;
         left: 50%;
         transform: translate(-50%, -25%);
     }
     .seconds {
-        bottom: 100%;
+        top: 100%;
+        transition: top .3s ease-out;
     }
     .meridiem {
-        top: 100%;
+        bottom: calc(0% - 1em);
     }
     .crown {
         position: absolute;
@@ -54,6 +74,7 @@
         left: 0;
         transform-origin: right center;
         pointer-events: none;
+		font-size: 12.5%;
         span {
             border-radius: 100%;
             position: absolute;
@@ -64,18 +85,41 @@
             pointer-events: auto;
         }
         &.hour span {
-            box-shadow: 0 0 0 .02em;
-            background: whitesmoke;
-            width: .15em;
-            height: .15em;
+            background: #fff;
+            box-shadow: 0 0 0 .15em;
+            width: 1em;
+            height: 1em;
         }
         &.minute span {
+            box-shadow: 0 0 0 .15em #fff;
             background: currentColor;
-            box-shadow: 0 0 0 .02em whitesmoke;
-            width: .125em;
-            height: .125em;
+            width: .9em;
+            height: .9em;
         }
     }
+	&.active-touch {
+        .lcd {
+    		top: -10%;
+    		font-size: 120%;
+            // color: #fff;
+            background: rgba(#000, .05);
+            padding-top: .3em;
+            pointer-events: none;
+    		z-index: 1;
+            margin: 0 -100%;
+            right: 50%;
+            left: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            backdrop-filter: blur(.03em);
+        }
+        .meridiem {
+            bottom: 57.5%;
+        }
+		.crown span {
+			background: $accent-color;
+		}
+	}
 }
 
 .time-dial.clock-mode {

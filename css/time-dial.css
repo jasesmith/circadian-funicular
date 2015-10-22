@@ -1,9 +1,12 @@
 .time-dial {
-  font-size: 200px;
+  font-size: 300px;
   width: 1em;
   height: 1em;
   position: relative;
-  line-height: 1; }
+  line-height: 1;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 100%; }
   .time-dial::before {
     content: '';
     position: absolute;
@@ -14,7 +17,6 @@
     -webkit-transform: scale(1.05);
         -ms-transform: scale(1.05);
             transform: scale(1.05);
-    background: whitesmoke;
     border: .04em solid;
     border-radius: 100%; }
   .time-dial .lcd {
@@ -24,19 +26,24 @@
     -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
-    font-family: "DIN Condensed";
+    font-size: 80%;
+    font-family: "DIN Condensed", Impact, Helvetica, sans-serif;
     -webkit-user-select: none;
        -moz-user-select: none;
         -ms-user-select: none;
-            user-select: none; }
-    .time-dial .lcd small {
-      font-size: .65em; }
+            user-select: none;
+    -webkit-transition: top .3s ease-out, font-size .3s ease-out;
+            transition: top .3s ease-out, font-size .3s ease-out;
+    text-shadow: 0.015em -0.015em 0 white, -0.015em 0.015em 0 white, 0.015em 0.015em 0 white, -0.015em -0.015em 0 white, -0.015em 0 0 white, 0.015em 0 0 white, 0 0.015em 0 white, 0 -0.015em 0 white; }
   .time-dial .time {
-    font-size: .3em; }
+    font-size: 35%; }
+    .time-dial .time span {
+      position: relative;
+      z-index: 1; }
   .time-dial .seconds,
   .time-dial .meridiem {
-    font-size: .125em;
-    font-family: "DIN Alternate";
+    font-size: 15%;
+    font-family: "DIN Alternate", Helvetica, sans-serif;
     text-transform: uppercase;
     position: absolute;
     left: 50%;
@@ -44,9 +51,11 @@
         -ms-transform: translate(-50%, -25%);
             transform: translate(-50%, -25%); }
   .time-dial .seconds {
-    bottom: 100%; }
+    top: 100%;
+    -webkit-transition: top .3s ease-out;
+            transition: top .3s ease-out; }
   .time-dial .meridiem {
-    top: 100%; }
+    bottom: calc(0% - 1em); }
   .time-dial .crown {
     position: absolute;
     top: 0;
@@ -56,7 +65,8 @@
     -webkit-transform-origin: right center;
         -ms-transform-origin: right center;
             transform-origin: right center;
-    pointer-events: none; }
+    pointer-events: none;
+    font-size: 12.5%; }
     .time-dial .crown span {
       border-radius: 100%;
       position: absolute;
@@ -69,15 +79,35 @@
               transform-origin: -.5em -.5em 0;
       pointer-events: auto; }
     .time-dial .crown.hour span {
-      box-shadow: 0 0 0 .02em;
-      background: whitesmoke;
-      width: .15em;
-      height: .15em; }
+      background: #fff;
+      box-shadow: 0 0 0 .15em;
+      width: 1em;
+      height: 1em; }
     .time-dial .crown.minute span {
+      box-shadow: 0 0 0 .15em #fff;
       background: currentColor;
-      box-shadow: 0 0 0 .02em whitesmoke;
-      width: .125em;
-      height: .125em; }
+      width: .9em;
+      height: .9em; }
+  .time-dial.active-touch .lcd {
+    top: -10%;
+    font-size: 120%;
+    background: rgba(0, 0, 0, 0.05);
+    padding-top: .3em;
+    pointer-events: none;
+    z-index: 1;
+    margin: 0 -100%;
+    right: 50%;
+    left: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    text-align: center;
+    -webkit-backdrop-filter: blur(0.03em);
+            backdrop-filter: blur(0.03em); }
+  .time-dial.active-touch .meridiem {
+    bottom: 57.5%; }
+  .time-dial.active-touch .crown span {
+    background: #10cddf; }
 
 .time-dial.clock-mode .time span {
   -webkit-animation: fadeIn alternate .5s linear infinite;

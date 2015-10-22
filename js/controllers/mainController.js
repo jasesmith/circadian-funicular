@@ -6,12 +6,18 @@
         $scope.diameter = 50;
         $scope.unit = 'vmin';
         // $scope.mode = 'set';
-        // $scope.xRay = true;
+        $scope.xRay = false;
         $scope.time = $moment();
-        $scope.time2 = $moment();
 
         $scope.format = function(datetime){
-              return new Date(datetime);
+            return new Date(datetime);
+        };
+
+        $scope.resetTime = function(){
+            $scope.diameter = 50;
+            $scope.unit = 'vmin';
+            $scope.xRay = false;
+            $scope.time = $moment();
         };
 
     }]);

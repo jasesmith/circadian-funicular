@@ -1,4 +1,4 @@
-(function($angular, $moment){
+(function($angular, $moment, Hammer){
 	'use strict';
 
 	$angular.module('app')
@@ -22,9 +22,9 @@
 	        return numbers;
 	    };
 
-	    var _getDeg = function(mouse, b){
+	    var _getDeg = function(input, b){
 	        var barrel = _getNumbers(b);
-	        var radians = Math.atan2((mouse.clientY - barrel.cy), (mouse.clientX - barrel.cx));
+	        var radians = Math.atan2((input.clientY - barrel.cy), (input.clientX - barrel.cx));
 	        var degrees = Math.round(radians * 180 / Math.PI);
 	        return degrees;
 	    };
@@ -61,14 +61,14 @@
 			},
 
 			template: '' +
-                '<div class="time-dial barrel" ng-class="{\'clock-mode\': mode == \'tell\'}" ng-style="size(unit)">' +
-                    '<div class="lcd" hm-tap="toggleMeridiem()">' +
+                '<div class="time-dial barrel" ng-class="{\'active-touch\': touching, \'clock-mode\': mode == \'tell\'}" ng-style="size(unit)">' +
+                    '<div class="lcd">' +
                         '<div class="seconds" ng-if="mode==\'tell\'">{{format(time)|date:\'ss\'}}</div>' +
                         '<div class="time">{{format(time)|date:\'h\'}}<span>:</span>{{format(time)|date:\'mm\'}}</div>' +
                         '<div class="meridiem">{{meridiem}}</div>' +
                     '</div>' +
-                    '<div class="crown hour"><span hm-pan="setCrown($event, \'h\')"></span></div>' +
-                    '<div class="crown minute"><span hm-pan="setCrown($event, \'m\')"></span></div>' +
+                    '<div class="crown hour"><span></span></div>' +
+                    '<div class="crown minute"><span></span></div>' +
                 '</div>' +
                 '',
 
@@ -84,6 +84,7 @@
 
                 var crownMinute = $angular.element(element[0].querySelector('.minute'));
                 var crownHour = $angular.element(element[0].querySelector('.hour'));
+				var lcd = $angular.element(element[0].querySelector('.lcd'));
 
 				var setMeridiem = function(time){
 					time = !time ? scope.time : time;
@@ -114,19 +115,20 @@
 					setMeridiem(time);
                 };
 
-                scope.toggleMeridiem = function(){
+                var uiToggleMeridiem = function(){
                     if(scope.time.format('a') === 'am') {
                         scope.time.add(12, 'hours');
                     } else {
                         scope.time.subtract(12, 'hours');
                     }
 					setMeridiem(scope.time);
+					scope.$apply();
                 };
 
-                scope.setCrown = function(e, beat){
-					var degrees = _getDeg(e.pointers[0], element[0]);
+                var uiSetCrown = function(e, beat){
+					var input = e.srcEvent && e.srcEvent.changedTouches ? e.srcEvent.changedTouches : e.pointers;
+					var degrees = _getDeg(input[0], element[0]);
                     var tick = _timeCalc(degrees, beat);
-                    // var t = scope.time; // storing for natural progression
 					var h = scope.time.hour();
 
                     if(beat === 'm') {
@@ -169,6 +171,7 @@
 
                     scope.prevTick = tick;
                     calibrate();
+					scope.$apply();
                 };
 
                 scope.format = function(datetime){
@@ -180,8 +183,39 @@
                     return { fontSize: scope.diameter + unit};
                 };
 
-                // init
-                calibrate();
+				// hammer time
+				scope.touching = false;
+				var hammerMinute = new Hammer(crownMinute[0]);
+				var hammerHour = new Hammer(crownHour[0]);
+				var hammerLcd = new Hammer(lcd[0], {});
+				var hammerOptions = {
+					direction: Hammer.DIRECTION_ALL,
+					threshold: 0
+				};
+
+				hammerMinute.get('pan').set(hammerOptions);
+				hammerMinute.on('pan panend pancancel', function(e) {
+					var touching = e.type === 'panend' || e.type === 'pancancel' ? false : true;
+					scope.touching = e.srcEvent && e.srcEvent.changedTouches ? touching : false;
+					uiSetCrown(e, 'm');
+				});
+
+				hammerHour.get('pan').set(hammerOptions);
+				hammerHour.on('pan panend pancancel', function(e) {
+					var touching = e.type === 'panend' || e.type === 'pancancel' ? false : true;
+					scope.touching = e.srcEvent && e.srcEvent.changedTouches ? touching : false;
+					uiSetCrown(e, 'h');
+				});
+
+				hammerLcd.on('tap', function() {
+					uiToggleMeridiem();
+				});
+
+				// hehe... watch time... get it?
+				scope.$watch('time', function(time){
+					calibrate(time);
+				});
+
                 if(scope.mode === 'tell') {
                     $interval(function(){
                         scope.time = $moment();
@@ -192,4 +226,4 @@
 		};
 	}]);
 
-})(window.angular, window.moment);
+})(window.angular, window.moment, window.Hammer);

@@ -3,8 +3,7 @@
 
     $angular.module('app', [
         'jamfu',
-        'ui.router',
-        'hmTouchEvents'
+        'ui.router'
     ])
     .controller('appController', [
         '$scope', '$state', '$location', '$timeout', 'system', 'AccountService', 'StorageService', 'UtilityService', function(
