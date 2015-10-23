@@ -16,8 +16,18 @@
         $scope.reset = function(){
             $scope.diameter = 50;
             $scope.unit = 'vmin';
-            $scope.xRay = false;
+            // $scope.xRay = false;
             $scope.time = $moment();
+        };
+
+        $scope.toggleMode = function(){
+          if($scope.mode === 'tell') {
+            $scope.mode = 'set';
+          }
+          else if($scope.mode === 'set') {
+            $scope.time = $moment();
+            $scope.mode = 'tell';
+          }
         };
 
     }]);

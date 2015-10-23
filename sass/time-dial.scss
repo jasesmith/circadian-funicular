@@ -82,37 +82,30 @@ $timing: .3s;
     font-size: 35%;
     position: relative;
   }
-  .seconds,
   .meridiem {
     font-size: 15%;
     font-family: "DIN Alternate", Helvetica, sans-serif;
     text-transform: uppercase;
     position: absolute;
     left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .seconds {
-    top: 15%;
-    opacity: .35;
-  }
-  .meridiem {
     bottom: 10%;
+    transform: translate(-50%, -50%);
   }
   .crown {
     position: absolute;
     z-index: 1;
     top: 0;
-    right: 50%;
-    bottom: 0;
-    left: 0;
-    transform-origin: right center;
+    right: 35%;
+    bottom: 50%;
+    left: 35%;
+    transform-origin: center bottom;
     pointer-events: none;
     font-size: 12.5%;
     span {
-      border-radius: 100%;
+      border-radius: 1em;
       position: absolute;
       top: 0;
-      left: 100%;
+      left: 50%;
       transform: translate(-50%, -50%) rotate(45deg);
       pointer-events: auto;
       /*
@@ -139,6 +132,14 @@ $timing: .3s;
       background: currentColor;
       width: .9em;
       height: .9em;
+    }
+    &.second span {
+      top: 1em;
+      background: currentColor;
+      opacity: .35;
+      // box-shadow: 0 0 0 .15em currentColor;
+      width: .5em;
+      height: .5em;
     }
   }
 
@@ -195,9 +196,18 @@ $timing: .3s;
     }
   }
 }
+.time-dial.set .crown.second {
+  display: none;
+}
+
 
 /*
-.time-dial.clock-mode {
+.time-dial.tell {
+  .crown.second {
+    transition: $timing linear;
+  }
+}
+.time-dial.tell {
   .time span {
     animation: fadeIn alternate .5s linear infinite;
   }

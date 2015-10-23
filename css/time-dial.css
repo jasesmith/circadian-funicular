@@ -100,38 +100,33 @@
   .time-dial .time {
     font-size: 35%;
     position: relative; }
-  .time-dial .seconds,
   .time-dial .meridiem {
     font-size: 15%;
     font-family: "DIN Alternate", Helvetica, sans-serif;
     text-transform: uppercase;
     position: absolute;
     left: 50%;
+    bottom: 10%;
     -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%); }
-  .time-dial .seconds {
-    top: 15%;
-    opacity: .35; }
-  .time-dial .meridiem {
-    bottom: 10%; }
   .time-dial .crown {
     position: absolute;
     z-index: 1;
     top: 0;
-    right: 50%;
-    bottom: 0;
-    left: 0;
-    -webkit-transform-origin: right center;
-        -ms-transform-origin: right center;
-            transform-origin: right center;
+    right: 35%;
+    bottom: 50%;
+    left: 35%;
+    -webkit-transform-origin: center bottom;
+        -ms-transform-origin: center bottom;
+            transform-origin: center bottom;
     pointer-events: none;
     font-size: 12.5%; }
     .time-dial .crown span {
-      border-radius: 100%;
+      border-radius: 1em;
       position: absolute;
       top: 0;
-      left: 100%;
+      left: 50%;
       -webkit-transform: translate(-50%, -50%) rotate(45deg);
           -ms-transform: translate(-50%, -50%) rotate(45deg);
               transform: translate(-50%, -50%) rotate(45deg);
@@ -158,6 +153,12 @@
       background: currentColor;
       width: .9em;
       height: .9em; }
+    .time-dial .crown.second span {
+      top: 1em;
+      background: currentColor;
+      opacity: .35;
+      width: .5em;
+      height: .5em; }
   .time-dial.active-touch .lcd {
     top: 0%;
     font-size: 45%;
@@ -206,8 +207,16 @@
     .time-dial.active-touch .crown span {
       background: #5d5d5f; }
 
+.time-dial.set .crown.second {
+  display: none; }
+
 /*
-.time-dial.clock-mode {
+.time-dial.tell {
+  .crown.second {
+    transition: $timing linear;
+  }
+}
+.time-dial.tell {
   .time span {
     animation: fadeIn alternate .5s linear infinite;
   }

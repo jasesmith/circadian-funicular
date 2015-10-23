@@ -57,18 +57,18 @@
         time: '=?',
         diameter: '=?',
         unit: '=?',
-        mode: '@'
+        mode: '=?'
       },
 
       template: '' +
-        '<div class="time-dial barrel" ng-class="{\'active-touch\': touching, \'clock-mode\': mode == \'tell\'}" ng-style="size(unit)">' +
+        '<div class="time-dial barrel {{mode}}" ng-class="{\'active-touch\': touching}" ng-style="size(unit)">' +
           '<div class="lcd {{meridiem}}" ng-class="{\'toggled\': toggled}">' +
-            '<div class="seconds" ng-if="mode==\'tell\'">{{format(time)|date:\'ss\'}}</div>' +
             '<div class="time" data-title="{{format(time)|date:\'h:mm\'}}">{{format(time)|date:\'h\'}}<span>:</span>{{format(time)|date:\'mm\'}}</div>' +
             '<div class="meridiem" data-title="{{meridiem}}">{{meridiem}}</div>' +
           '</div>' +
           '<div class="crown hour"><span beat="h"></span></div>' +
           '<div class="crown minute"><span beat="m"></span></div>' +
+          '<div class="crown second"><span beat="s"></span></div>' +
         '</div>' +
         '',
 
@@ -84,6 +84,7 @@
 
         var crownMinute = $angular.element(element[0].querySelector('.minute'));
         var crownHour = $angular.element(element[0].querySelector('.hour'));
+        var crownSecond = $angular.element(element[0].querySelector('.second'));
         var lcd = $angular.element(element[0].querySelector('.lcd'));
 
         var setMeridiem = function(time){
@@ -101,8 +102,10 @@
 
         var calibrate = function(time, beat){
           time = !time ? scope.time : time;
+          var second = time.seconds();
           var minute = time.minutes();
           var hour = time.hours();
+          var degreeSecond = (second * 6);
           var degreeMinute = (minute * 6);
           var degreeHour = (hour * 30 + minute * 0.5);
 
@@ -112,6 +115,7 @@
           if(!beat || beat === 'h') {
             _rotate(crownHour, degreeHour);
           }
+          _rotate(crownSecond, degreeSecond);
           setMeridiem(time);
         };
 
@@ -126,7 +130,7 @@
           $timeout(function(){
             scope.toggled = false;
           }, 300);
-		  scope.$apply();
+		      scope.$apply();
         };
 
         var uiSetCrown = function(e, beat){
@@ -215,17 +219,32 @@
           uiToggleMeridiem();
         });
 
+        var _timer = null;
+        var _startTimer = function () {
+          _timer = $interval(function () {
+            scope.time = $moment();
+            calibrate(scope.time);
+          }, 1000);
+        };
+        var _stopTimer = function () {
+          if ($angular.isDefined(_timer)) {
+            $interval.cancel(_timer);
+          }
+        };
+
+        // scope.mode = 'tell';
+        scope.$watch('mode', function(mode){
+          if(mode === 'tell') {
+            _startTimer();
+          } else {
+            _stopTimer();
+          }
+        });
+
         // hehe... watch time... get it?
         scope.$watch('time', function(time){
           calibrate(time);
         });
-
-        if(scope.mode === 'tell') {
-          $interval(function(){
-            scope.time = $moment();
-            calibrate(scope.time);
-          }, 500);
-        }
       }
     };
   }]);
