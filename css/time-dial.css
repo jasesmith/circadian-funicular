@@ -76,6 +76,7 @@
         -ms-user-select: none;
             user-select: none;
     pointer-events: auto;
+    cursor: pointer;
     -webkit-font-smoothing: subpixel-antialiased;
     -webkit-transition: color 0.3s ease-out, background 0.3s ease-out, top 0.3s ease-out;
             transition: color 0.3s ease-out, background 0.3s ease-out, top 0.3s ease-out; }
@@ -131,6 +132,7 @@
           -ms-transform: translate(-50%, -50%) rotate(45deg);
               transform: translate(-50%, -50%) rotate(45deg);
       pointer-events: auto;
+      cursor: pointer;
       /*
       &::after {
          display: none;
@@ -207,6 +209,13 @@
     .time-dial.active-touch .crown span {
       background: #5d5d5f; }
 
+/* disable dragging crowns when telling time */
+.time-dial.tell .lcd,
+.time-dial.tell .crown span {
+  pointer-events: none;
+  cursor: default; }
+
+/* hide second marker when setting time */
 .time-dial.set .crown.second {
   display: none; }
 
