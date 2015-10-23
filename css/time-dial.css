@@ -82,12 +82,12 @@
     .time-dial .lcd.toggled .meridiem {
       -webkit-animation: pulse 0.3s ease-out;
               animation: pulse 0.3s ease-out; }
-    .time-dial .lcd.toggled.noon .meridiem, .time-dial .lcd.toggled.midnight .meridiem {
+    .time-dial .lcd.toggled.Noon .meridiem, .time-dial .lcd.toggled.Midnight .meridiem {
       -webkit-animation: pulse-alt 0.3s ease-out;
               animation: pulse-alt 0.3s ease-out; }
-    .time-dial .lcd.noon .time, .time-dial .lcd.midnight .time {
+    .time-dial .lcd.Noon .time, .time-dial .lcd.Midnight .time {
       display: none; }
-    .time-dial .lcd.noon .meridiem, .time-dial .lcd.midnight .meridiem {
+    .time-dial .lcd.Noon .meridiem, .time-dial .lcd.Midnight .meridiem {
       font-size: 25%;
       font-family: inherit;
       position: relative;
@@ -175,11 +175,18 @@
     border-radius: .05em;
     -webkit-backdrop-filter: blur(0.1em);
             backdrop-filter: blur(0.1em); }
-    .time-dial.active-touch .lcd.noon .meridiem, .time-dial.active-touch .lcd.midnight .meridiem {
+    .time-dial.active-touch .lcd.Noon .meridiem, .time-dial.active-touch .lcd.Midnight .meridiem {
       font-size: 60%;
       -webkit-transform: translate(0, 0);
           -ms-transform: translate(0, 0);
               transform: translate(0, 0); }
+  .time-dial.active-touch .time::before,
+  .time-dial.active-touch .meridiem::before {
+    content: attr(data-title);
+    position: absolute;
+    -webkit-text-stroke: 0.125em #008fa1;
+    left: 0;
+    z-index: -1; }
   .time-dial.active-touch .time {
     display: inline-block;
     font-size: 60%; }

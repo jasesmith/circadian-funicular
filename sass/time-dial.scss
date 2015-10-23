@@ -55,15 +55,15 @@ $timing: .3s;
       .meridiem {
         animation: pulse $timing ease-out;
       }
-      &.noon,
-      &.midnight {
+      &.Noon,
+      &.Midnight {
         .meridiem {
           animation: pulse-alt $timing ease-out;
         }
       }
     }
-    &.noon,
-    &.midnight {
+    &.Noon,
+    &.Midnight {
       .time {
         display: none;
       }
@@ -158,13 +158,21 @@ $timing: .3s;
       text-align: center;
       border-radius: .05em;
       backdrop-filter: blur(.1em);
-      &.noon,
-      &.midnight {
+      &.Noon,
+      &.Midnight {
         .meridiem {
           font-size: 60%;
           transform: translate(0, 0);
         }
       }
+    }
+    .time::before,
+    .meridiem::before {
+      content: attr(data-title);
+      position: absolute;
+      -webkit-text-stroke: .125em darken($accent-color, 10%);
+      left: 0;
+      z-index: -1;
     }
     .time {
       display: inline-block;

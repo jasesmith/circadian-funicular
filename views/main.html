@@ -1,6 +1,6 @@
 <div class="flex-1 flex-column pad-1">
     <div class="flex-none flex-row justify-content-between">
-        <span>{{format(time) | date: 'HH:mm, MMMM d'}}</span>
+        <span>{{format(time) | date: 'HH:mm – MMMM d'}}</span>
         <i ng-click="reset()" class="fa fa-history fa-fw fa-lg"></i>
     </div>
     <div class="flex-2 flex-row justify-content-around align-items-center" ng-class="{'x-ray': xRay}">

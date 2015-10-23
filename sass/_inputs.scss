@@ -147,7 +147,7 @@ input {
         border: 0;
         vertical-align: middle;
         border-radius: 1em;
-        background: #7e57c2;
+        background: rgba($darker, .3);
         &::-webkit-slider-thumb {
             -webkit-appearance: none;
             width: 1em;
