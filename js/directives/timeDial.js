@@ -2,7 +2,7 @@
 	'use strict';
 
 	$angular.module('app')
-	.directive('timeDial', ['$interval', function($interval) {
+	.directive('timeDial', ['$timeout', '$interval', function($timeout, $interval) {
 		// helpers
 	    var _getNumbers = function(target){
 	        var numbers = {};
@@ -62,13 +62,13 @@
 
 			template: '' +
                 '<div class="time-dial barrel" ng-class="{\'active-touch\': touching, \'clock-mode\': mode == \'tell\'}" ng-style="size(unit)">' +
-                    '<div class="lcd">' +
+                    '<div class="lcd {{meridiem}}" ng-class="{\'toggled\': toggled}">' +
                         '<div class="seconds" ng-if="mode==\'tell\'">{{format(time)|date:\'ss\'}}</div>' +
-                        '<div class="time">{{format(time)|date:\'h\'}}<span>:</span>{{format(time)|date:\'mm\'}}</div>' +
+						'<div class="time">{{format(time)|date:\'h\'}}<span>:</span>{{format(time)|date:\'mm\'}}</div>' +
                         '<div class="meridiem">{{meridiem}}</div>' +
                     '</div>' +
-                    '<div class="crown hour"><span></span></div>' +
-                    '<div class="crown minute"><span></span></div>' +
+                    '<div class="crown hour"><span beat="h"></span></div>' +
+                    '<div class="crown minute"><span beat="m"></span></div>' +
                 '</div>' +
                 '',
 
@@ -122,6 +122,10 @@
                         scope.time.subtract(12, 'hours');
                     }
 					setMeridiem(scope.time);
+					scope.toggled = true;
+					$timeout(function(){
+						scope.toggled = false;
+					}, 300);
 					scope.$apply();
                 };
 

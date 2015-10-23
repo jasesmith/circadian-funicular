@@ -2623,7 +2623,6 @@ main.add-course ~ .do-this {
 .as-sortable-un-selectable {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
@@ -2651,9 +2650,12 @@ main.add-course ~ .do-this {
       border-radius: 100%;
       font-family: 'FontAwesome'; }
 
-main > header:not([class*="bg-"]) {
+body {
   background: #00BCD4;
   color: #f3f4f5; }
+
+main > header:not([class*="bg-"]) {
+  border-bottom: 0.2em solid #40cddf; }
 
 .view-is-loading {
   position: absolute;

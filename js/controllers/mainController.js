@@ -13,7 +13,7 @@
             return new Date(datetime);
         };
 
-        $scope.resetTime = function(){
+        $scope.reset = function(){
             $scope.diameter = 50;
             $scope.unit = 'vmin';
             $scope.xRay = false;

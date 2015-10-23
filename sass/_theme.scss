@@ -1,4 +1,8 @@
+body {
+    background: $base;
+    color: set-text-color($base);
+}
+
 main > header:not([class*="bg-"]) {
-    background: $base; //mix($grey-1, $light, 50%);
-    color: set-text-color($base); //$base-mix;
+    border-bottom: .2em solid $base-light;
 }
